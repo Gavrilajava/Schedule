@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import LoginForm from '../presentational/LoginForm'
 import PropTypes from 'prop-types'
-import { API_ROOT, getHeaders, handleResponse, throwError } from '../../api'
+import { API_ROOT, getHeaders, throwError } from '../../api'
+
 
 const LoginFormContainer = ({ logIn }) => {
 

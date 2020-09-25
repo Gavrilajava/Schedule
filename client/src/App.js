@@ -23,6 +23,7 @@ const App = ({ user }) => {
         <Switch>
           <Route exact path="/" render={(routerProps) => <ScheduleContainer {...routerProps} /> }/>
           <Route path="/schedule/:code" render={(routerProps) => <ScheduleContainer {...routerProps} /> }/>
+          <Route exact path="/schedule" render={(routerProps) => <ScheduleContainer {...routerProps} /> }/>
           <Route exact path="/workcenters" render={(routerProps) => <WorkcentersContainer {...routerProps} /> }/>
           <Route exact path="/uploads" render={(routerProps) => <UploadsContainer {...routerProps} /> }/>
           <Route exact path="/users" render={(routerProps) => <UsersContainer {...routerProps} /> }/>
