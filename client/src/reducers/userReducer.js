@@ -3,7 +3,7 @@ const initialUser = () => {
     const user = localStorage.username
     return { user }
   } else {
-    return { user: false }
+    return { user: undefined }
   }
 }
 
@@ -15,12 +15,6 @@ export default function UserReducer (state = initialUser(), action) {
       return {
         ...state,
         user: action.auth.user
-      }
-    case 'setName':
-      localStorage.username = action.username
-      return {
-        ...state,
-        user: action.username
       }
     default:
       return state

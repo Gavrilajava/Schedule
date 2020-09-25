@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
 }
 
 App.propTypes = {
-  user: PropTypes.string.isRequired
+  user: PropTypes.string
 }
 
 export default connect(mapStateToProps)(App)

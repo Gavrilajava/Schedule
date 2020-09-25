@@ -1,1 +1,11 @@
+@import '../harmonium-settings/color-palette';
+@import '../harmonium-settings/harmonium-settings';
 @import '~harmonium/scss/app';
+
+
+.root{
+  height: 100vh;
+}
+.container{
+  margin: 25vh 0;
+}

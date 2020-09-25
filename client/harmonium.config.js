@@ -233,7 +233,7 @@ module.exports = {
     "grid": {
       "row": {
         "width": {
-          "value": "{screen.width.large.value}"
+          "value": "{screen.width.full.value}"
         }
       },
       "column": {
