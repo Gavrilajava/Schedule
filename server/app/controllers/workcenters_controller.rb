@@ -1,27 +1,19 @@
 class WorkcentersController < ApplicationController
 
-  before_action :authorize
+ 
   before_action :get_workcenter, only: [:destroy, :update]
 
   def index
-    @workcenters = Workcenter.sorted
-    session[:edit] ? @workcenter = Workcenter.find(session[:edit]) : @workcenter = Workcenter.new
-    
+    render json: Workcenter.sorted
   end
 
-  def edit
-    session[:edit] = params[:id]
-    redirect_to workcenters_path
-  end
 
   def update
-    session[:edit] = nil
     if @workcenter.update(strong_params)
-      flash[:success] = "Workcenter updated successfully!"
+      render json: Workcenter.sorted
     else
-      flash.alert = @workcenter.errors.messages
+      render json: {error: @workcenter.errors.messages}
     end
-    redirect_to workcenters_path
   end
 
   def create

@@ -45,36 +45,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_135401) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "keywords", force: :cascade do |t|
-    t.string "title"
-    t.boolean "isActive"
-    t.boolean "isEntryLevel"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.string "locId"
-    t.boolean "isActive"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "postings", force: :cascade do |t|
-    t.string "company"
-    t.string "title"
-    t.string "link"
-    t.text "description"
-    t.string "city"
-    t.string "state"
-    t.string "salary"
-    t.string "category", default: "new"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "used_keywords"
-  end
-
   create_table "productions", force: :cascade do |t|
     t.string "order"
     t.string "cad"
@@ -99,15 +69,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_135401) do
     t.string "sales_order"
     t.date "possible_date"
     t.date "order_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "scheduled_postings", force: :cascade do |t|
-    t.string "url"
-    t.string "keywords"
-    t.string "posting_id"
-    t.string "status", default: "new"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
