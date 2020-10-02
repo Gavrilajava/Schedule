@@ -11,6 +11,7 @@ const EditableCell = props => {
   } = props
 
 
+
   return(
     <Table.Data>
       <ContentEditable

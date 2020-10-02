@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef} from 'react'
 import EditableCell from '../presentational/EditableCell'
 
 
@@ -12,7 +12,7 @@ const EditableCellContainer = ({children, update, parameter, id}) => {
 
   const handleBlur = e => {
     e.target.innerText = text.current
-    update(id, parameter, text.current)
+    update(parameter, text, id)
   }
 
 
@@ -21,6 +21,7 @@ const EditableCellContainer = ({children, update, parameter, id}) => {
       e.target.blur()
     }
   }
+
 
   return (
     <EditableCell

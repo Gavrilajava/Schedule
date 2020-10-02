@@ -4,35 +4,39 @@ class WorkcentersController < ApplicationController
   before_action :get_workcenter, only: [:destroy, :update]
 
   def index
-    render json: Workcenter.sorted
+    render json: Workcenter.serialized
   end
 
 
   def update
     if @workcenter.update(strong_params)
-      render json: Workcenter.sorted
+      render json: {notice: "Workcenter #{@workcenter.code} updated"}
     else
-      render json: {error: @workcenter.errors.messages}
+      render json: {error: @workcenter.format_errors}
     end
   end
 
   def create
     workcenter = Workcenter.new(strong_params)
     if workcenter.save
-      flash[:success] = "Workcenter created successfully!"
+      render json: {
+                    notice: "Workcenter #{workcenter.code} created",
+                    items: Workcenter.serialized
+                  }
     else
-      flash.alert = workcenter.errors.messages
+      render json: {error: workcenter.format_errors}
     end
-    redirect_to workcenters_path
   end
 
   def destroy
     if  @workcenter.destroy
-      flash[:success] = "Workcenter deleted successfully!"
+      render json: {
+        notice: "Workcenter deleted",
+        items: Workcenter.serialized
+      }
     else
-      flash.alert = @workcenter.errors.messages
+      render json: {error: @workcenter.format_errors}
     end
-    redirect_to workcenters_path
   end
 
   private
@@ -42,7 +46,7 @@ class WorkcentersController < ApplicationController
   end
 
   def strong_params
-    params.require(:workcenter).permit(:code, :name, :group, :description, :average_downtime, :frozen_period, :minimal_setup, :setup_reduction_type, :average_setup, :average_speed, :max_deviation)
+    params.require(:item).permit(:code, :name, :group, :description, :average_downtime, :frozen_period, :minimal_setup, :setup_reduction_type, :average_setup, :average_speed, :max_deviation)
   end
 
 end

@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   
   post "/login", to: "auth#create"
 
-  get '/workcenters', to: "workcenters#index"
-  post '/workcenters', to: "workcenters#index"
-  patch '/workcenters/:id', to: "workcenters#update"
-  delete '/workcenters/:id', to: "workcenters#destroy"
+  get '/workcenter', to: "workcenters#index"
+  post '/workcenter', to: "workcenters#create"
+  patch '/workcenter/:id', to: "workcenters#update"
+  delete '/workcenter/:id', to: "workcenters#destroy"
 
 end

@@ -3,8 +3,10 @@ class Workcenter < ApplicationRecord
   has_many :jobs
 
   validates :code, format: { with: /\A[0-9]{3}\z/, message: "should consist of three digits" }
+  validates :average_speed, numericality: { only_integer: true , message: "should be integer number"}
 
   scope :sorted, -> {order(:code)}
+  scope :serialized, -> {sorted.select(:id, :code, :name, :group, :description, :average_downtime, :frozen_period, :minimal_setup, :setup_reduction_type, :average_setup, :average_speed, :max_deviation, :start_date)}
   scope :groups, -> {distinct.pluck(:group)}
   scope :get_for_group, -> (group){where(group: group).order(:code).pluck(:code)}
 
