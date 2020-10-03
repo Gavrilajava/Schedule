@@ -10,7 +10,10 @@ class WorkcentersController < ApplicationController
 
   def update
     if @workcenter.update(strong_params)
-      render json: {notice: "Workcenter #{@workcenter.code} updated"}
+      render json: {
+        notice: "Workcenter #{@workcenter.code} updated",
+        items: Workcenter.serialized
+      }
     else
       render json: {error: @workcenter.format_errors}
     end
@@ -20,9 +23,9 @@ class WorkcentersController < ApplicationController
     workcenter = Workcenter.new(strong_params)
     if workcenter.save
       render json: {
-                    notice: "Workcenter #{workcenter.code} created",
-                    items: Workcenter.serialized
-                  }
+        notice: "Workcenter #{workcenter.code} created",
+        items: Workcenter.serialized
+      }
     else
       render json: {error: workcenter.format_errors}
     end

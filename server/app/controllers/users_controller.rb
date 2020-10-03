@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :authorize, :check_priveleges
-  before_action :action_user, only: [:destroy, :update, :edit]
+  before_action :check_priveleges
+  before_action :action_user, only: [:destroy, :update]
 
 
   def index
-    @action_user = User.new
-    @users = User.all
+    render json: User.all
   end
 
-  def edit
-  
-  end 
 
   def update
     if !user_params[:password]
@@ -57,6 +53,6 @@ private
   end
 
   def check_priveleges
-    redirect_to root_path, alert: 'Only Admin can access this page.' if !current_user.admin
+    render json: {error: 'Only Admin can access this page.'} if !@user.admin
   end
 end

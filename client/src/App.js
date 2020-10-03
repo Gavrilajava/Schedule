@@ -28,7 +28,7 @@ const App = ({ user }) => {
           <Route exact path="/schedule" render={(routerProps) => <ScheduleContainer {...routerProps} /> }/>
           <Route exact path="/workcenters" render={(routerProps) => <ItemsContainer {...routerProps} model = "workcenter" /> }/>
           <Route exact path="/uploads" render={(routerProps) => <UploadsContainer {...routerProps} /> }/>
-          <Route exact path="/users" render={(routerProps) => <UsersContainer {...routerProps} /> }/>
+          <Route exact path="/users" render={(routerProps) => <ItemsContainer {...routerProps} model = "user" /> }/>
           <Route exact path="/settings" render={(routerProps) => <SettingsContainer {...routerProps} /> }/>
           <Route exact path="/calendars" render={(routerProps) => <CalendarsContainer {...routerProps} /> }/>
           <Route exact path="/performance" render={(routerProps) => <PerformanceContainer {...routerProps} /> }/>

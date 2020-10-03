@@ -10,8 +10,9 @@ const ItemsTable = props => {
   const { 
     items, 
     headers, 
-    update, 
-    newItem, 
+    newItem,
+    editItem,
+    updateItem,
     addParameter, 
     createItem, 
     deleteItem, 
@@ -61,8 +62,7 @@ const ItemsTable = props => {
                 <Table.Row key = {item.id}>
                   {headers.map(header => 
                     <EditableCellContainer
-                      update = {update}
-                      id = {item.id}
+                      edit = {item}
                       parameter = {header.key}
                       key = {`${item.id}#${header.key}`}
                     >
@@ -72,8 +72,8 @@ const ItemsTable = props => {
                     <Button 
                       className = "noMargin" 
                       small 
-                      alert 
-                      onClick = {() => deleteItem(item.id)}
+                      alert = {!(editItem && editItem.id === item.id)}
+                      onClick = {editItem && editItem.id === item.id ? () => updateItem(item.id) : () => deleteItem(item.id)}
                     >
                       Delete
                     </Button>
@@ -88,7 +88,8 @@ const ItemsTable = props => {
 
 const mapStateToProps = (state) => {
   return {
-    newItem: state.NewItemReducer.item
+    newItem: state.NewItemReducer.item,
+    editItem: state.EditItemReducer.item
   }
 }
 

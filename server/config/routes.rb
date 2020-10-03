@@ -7,4 +7,9 @@ Rails.application.routes.draw do
   patch '/workcenter/:id', to: "workcenters#update"
   delete '/workcenter/:id', to: "workcenters#destroy"
 
+  get '/user', to: "users#index"
+  post '/user', to: "users#create"
+  patch '/user/:id', to: "users#update"
+  delete '/user/:id', to: "users#destroy"
+
 end

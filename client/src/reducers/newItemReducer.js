@@ -14,15 +14,11 @@ export default function NewItemReducer (state = initialState, action) {
           item: null
         }
     case 'addParameter':
-      if (action.value.current.length)
-        return {
-          item: {
-            ...state.item,
-            [action.parameter]: action.value.current
-          }
+      return {
+        item: {
+          ...state.item,
+          [action.parameter]: action.value
         }
-      else{
-        return {item: Object.keys(state.item).reduce((s, k) => ( k === action.parameter ? s : {...s, [k]: state.item[k] }), {})}
       }
     default:
       return state
