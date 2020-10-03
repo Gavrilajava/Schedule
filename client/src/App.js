@@ -10,7 +10,6 @@ import ItemsContainer from './components/containers/ItemsContainer'
 import UploadsContainer from './components/containers/UploadsContainer'
 import SettingsContainer from './components/containers/SettingsContainer'
 import CalendarsContainer from './components/containers/CalendarsContainer'
-import PerformanceContainer from './components/containers/PerformanceContainer'
 import CalloutContainer from './components/containers/CalloutContainer'
 
 const App = ({ user }) => {
@@ -30,7 +29,7 @@ const App = ({ user }) => {
           <Route exact path="/users" render={(routerProps) => <ItemsContainer {...routerProps} model = "user" /> }/>
           <Route exact path="/settings" render={(routerProps) => <SettingsContainer {...routerProps} /> }/>
           <Route exact path="/calendars" render={(routerProps) => <CalendarsContainer {...routerProps} /> }/>
-          <Route exact path="/performance" render={(routerProps) => <PerformanceContainer {...routerProps} /> }/>
+          <Route exact path="/performance" render={(routerProps) => <ItemsContainer {...routerProps} model = "workcenter" /> }/>
         </Switch>
       </BrowserRouter>
   )
