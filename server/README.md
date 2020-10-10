@@ -1,4 +1,4 @@
-Scheduling
+Scheduling app
 
 ## Built With
 
