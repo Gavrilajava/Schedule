@@ -9,7 +9,8 @@ const ItemsTable = props => {
 
   const { 
     items, 
-    headers, 
+    headers,
+    options,
     newItem,
     editItem,
     updateItem,
@@ -19,7 +20,7 @@ const ItemsTable = props => {
     initializeNewItem,
     filter,
     setFilter } = props
-  
+
   return(
         <>
           <Input placeholder="Type to search" value = {filter} onChange = {e => setFilter(e.target.value)}></Input>
@@ -46,6 +47,7 @@ const ItemsTable = props => {
                           update = {addParameter}
                           parameter = {header.key}
                           key = {`new#${header.key}`}
+                          options = {options[header.key]}
                         >
                           {newItem[header.key]}
                         </EditableCellContainer>)
@@ -65,6 +67,7 @@ const ItemsTable = props => {
                       edit = {item}
                       parameter = {header.key}
                       key = {`${item.id}#${header.key}`}
+                      options = {options[header.key]}
                     >
                       {item[header.key]}
                     </EditableCellContainer>)}
@@ -75,7 +78,7 @@ const ItemsTable = props => {
                       alert = {!(editItem && editItem.id === item.id)}
                       onClick = {editItem && editItem.id === item.id ? () => updateItem(item.id) : () => deleteItem(item.id)}
                     >
-                      Delete
+                      {editItem && editItem.id === item.id ? "Update" : "Delete"}
                     </Button>
                   </Table.Data>
                 </Table.Row>
@@ -89,13 +92,15 @@ const ItemsTable = props => {
 const mapStateToProps = (state) => {
   return {
     newItem: state.NewItemReducer.item,
-    editItem: state.EditItemReducer.item
+    editItem: state.EditItemReducer.item,
+    options: state.ItemsReducer.options
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return { 
     initializeNewItem: () => dispatch({type: 'initializeNewItem'}),
+    setFilter: (filter) => dispatch({ type: 'setFilter', filter: filter }),
     addParameter: (parameter, value) => dispatch({type: 'addParameter', parameter: parameter, value: value})
   }
 }

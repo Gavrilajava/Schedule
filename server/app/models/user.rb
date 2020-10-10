@@ -56,4 +56,23 @@ class User < ApplicationRecord
     self.role == 'Admin'
   end
 
+  def self.serialized
+    User.all.map {|user| 
+      {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        email: user.email,
+        password: nil,
+        password_confirmation: nil
+      }
+    }
+  end
+
+  def self.options
+    {
+      role: ROLES
+    }
+  end
+
 end

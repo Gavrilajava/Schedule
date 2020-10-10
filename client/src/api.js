@@ -15,5 +15,16 @@ export const getHeaders = () => {
   }
 }
 
+export const fetchBackend = (model, method, id,  body, updateState, setError) => {
+  fetch(API_ROOT + '/' + model + '/' + id, {
+    method: method,
+    headers: getHeaders(),
+    body: body ? JSON.stringify(body) : null
+  })
+    .then(resp => resp.json())
+    .then(json => updateState(json))
+    .catch(e => setError(e.message))
+}
+
 export const throwError = e => {throw Error(e)}
 

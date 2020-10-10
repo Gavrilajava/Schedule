@@ -4,7 +4,7 @@ class WorkcentersController < ApplicationController
   before_action :get_workcenter, only: [:destroy, :update]
 
   def index
-    render json: Workcenter.serialized
+    render json: {items: Workcenter.serialized}
   end
 
 

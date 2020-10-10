@@ -1,11 +1,15 @@
-import React, { useRef} from 'react'
+import React, { useRef, useState } from 'react'
 import EditableCell from '../presentational/EditableCell'
+import Table from 'harmonium/lib/Table'
+import Select from 'harmonium/lib/Select'
 import { connect } from 'react-redux'
 
 
-const EditableCellContainer = ({children, parameter, edit, editItem, initializeEditItem, addParameter, editParameter}) => {
+const EditableCellContainer = ({children, parameter, edit, editItem, initializeEditItem, addParameter, editParameter, options}) => {
 
   const text = useRef(children ? children.toString() : '')
+
+  const [editable, setEditable] = useState(false)
 
   const handleChange = e => {
     if (edit && !editItem){
@@ -26,16 +30,36 @@ const EditableCellContainer = ({children, parameter, edit, editItem, initializeE
     }
   }
 
-
-  return (
-    <EditableCell
-      handleBlur={handleBlur}
-      handleChange={handleChange}
-      handleKeyDown = {handleKeyDown}
-    >
-      {text.current}
-    </EditableCell>
-  )
+  if (options){
+    if (editable){
+      return (
+        <Table.Data>
+          <Select 
+            name={parameter} 
+            options={options.map(opt => ({label: opt, value: opt}))}
+          />
+        </Table.Data>
+      )
+    }
+    else {
+      return (
+        <td onClick = {() => setEditable(true)}>
+          {children}
+        </td>
+      )
+    }
+  }
+  else {
+    return (
+      <EditableCell
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleKeyDown = {handleKeyDown}
+      >
+        {text.current}
+      </EditableCell>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {

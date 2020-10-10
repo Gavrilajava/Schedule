@@ -5,21 +5,28 @@ class UsersController < ApplicationController
 
 
   def index
-    render json: User.all
+    render json:  {
+      items: User.serialized,
+      options: User.options
+    }
   end
 
 
   def update
-    if !user_params[:password]
-      user_params.delete(:password)
-      user_params.delete(:password_confirmation)
+  
+    if !params[:item][:password] && !params[:item][:password_confirmation]
+      params[:item] = params[:item].except(:password, :password_confirmation)
+    elsif params[:item][:password] != params[:item][:password_confirmation]
+      render json: {error: "Password should match confirmation"}
     end
     if @action_user.update(user_params)
-      flash[:success] = "User updated successfully!"
-      redirect_to users_path
+      render json: {
+        notice: "User #{@action_user.name} updated",
+        items: User.serialized,
+        options: User.options
+      }
     else
-      flash.alert = @action_user.errors.messages
-      redirect_to edit_user_path(@action_user)
+      render json: {error: @action_user.format_errors}
     end
   end
 
@@ -45,7 +52,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:name, :role, :email, :password, :password_confirmation)
+    params.require(:item).permit(:id, :name, :role, :email, :password, :password_confirmation)
   end
 
   def action_user
